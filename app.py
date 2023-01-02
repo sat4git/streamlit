@@ -3,8 +3,7 @@ import numpy as np # np mean, np random
 import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
-import datetime
-
+from datetime import datetime
 
 # read csv from a github repo
 df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")

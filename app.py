@@ -20,6 +20,10 @@ st.set_page_config(
 st.title("Real-Time / Live Data Science Dashboard")
 today = datetime.today().date()
 st.subheader(today)
+
+first_col1, first_col2, first_col3 = st.columns(3)
+first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
+
 # top-level filters 
 
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))

@@ -18,7 +18,8 @@ st.set_page_config(
 # dashboard title
 
 st.title("Real-Time / Live Data Science Dashboard")
-
+today = datetime.today().date()
+st.header(today)
 # top-level filters 
 
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))

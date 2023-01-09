@@ -34,7 +34,16 @@ gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_columns(list(df.columns.values), editable=True)
 gb.configure_column('virtual column a + b', valueGetter='Number(df.age) * 2', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
 go = gb.build()
-st.write(go)
+grid_table = AgGrid(df, 
+            gridOptions = go, 
+            enable_enterprise_modules = True,
+            fit_columns_on_grid_load = True,
+            height=500,
+            width='100%',
+            # theme = "streamlit",
+            update_mode = GridUpdateMode.SELECTION_CHANGED,
+            reload_data = True
+                   )
 
 st.subheader(today)
 

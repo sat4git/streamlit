@@ -30,7 +30,9 @@ first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.1
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
 # AGGRID TABLE
-data = df[['age','day']]
+#data = df[['age','day']]
+data = df
+
 
 st.write(data)
 gb = GridOptionsBuilder.from_dataframe(data)

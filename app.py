@@ -30,12 +30,14 @@ first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.1
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
 # AGGRID TABLE
-st.write(df["age"])
-gb = GridOptionsBuilder.from_dataframe(df)
+data = df["age"]
+
+st.write(data)
+gb = GridOptionsBuilder.from_dataframe(data)
 gb.configure_columns(list(df.columns.values), editable=True)
-gb.configure_column('virtual column a + b', valueGetter='Number(df["age"])', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
+gb.configure_column('virtual column a + b', valueGetter='Number(data.age)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
 go = gb.build()
-grid_table = AgGrid(df, 
+grid_table = AgGrid(data, 
             gridOptions = go, 
             enable_enterprise_modules = True,
             fit_columns_on_grid_load = True,

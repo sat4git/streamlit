@@ -4,6 +4,7 @@ import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
 from datetime import datetime
+from st_aggrid import AgGrid
 
 # read csv from a github repo
 df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")

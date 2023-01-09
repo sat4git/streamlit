@@ -4,7 +4,7 @@ import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
 from datetime import datetime
-from st_aggrid import AgGrid
+from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
 # read csv from a github repo
 df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")
@@ -29,6 +29,10 @@ first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.1
 
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
+# AGGRID TABLE
+gb = GridOptionsBuilder.from_dataframe(df)
+gb.configure_column('virtual column a + b', valueGetter='Number(df.age) * 2', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
+go = gb.build()
 
 # creating a single-element container.
 placeholder = st.empty()

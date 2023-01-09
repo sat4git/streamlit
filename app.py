@@ -34,6 +34,9 @@ gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_column('virtual column a + b', valueGetter='Number(df.age) * 2', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
 go = gb.build()
 
+
+st.subheader(today)
+
 # creating a single-element container.
 placeholder = st.empty()
 

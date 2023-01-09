@@ -32,7 +32,7 @@ job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 # AGGRID TABLE
 gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_columns(list(df.columns.values), editable=True)
-gb.configure_column('virtual column a + b', valueGetter='Number(df.age) * Number(2)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
+gb.configure_column('virtual column a + b', valueGetter='Number(df.age)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
 go = gb.build()
 grid_table = AgGrid(df, 
             gridOptions = go, 

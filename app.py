@@ -34,8 +34,12 @@ first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.1
 job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
 # AGGRID TABLE
-#data = df[['age','day']]
-data = df
+# data = df[['age','day']]
+# data = df
+from sqlalchemy import create_engine
+
+sql = "select name, class, mark, sex from student"
+data = pd.read_sql(sql,con=my_conn)
 
 
 st.write(data)
@@ -46,10 +50,10 @@ go = gb.build()
 grid_table = AgGrid(data, 
             gridOptions = go, 
             enable_enterprise_modules = True,
-            fit_columns_on_grid_load = False,
-            height=500,
+            fit_columns_on_grid_load = True,
+            height=100%,
             width='100%',
-            # theme = "streamlit",
+            theme = "streamlit",
             update_mode = GridUpdateMode.SELECTION_CHANGED,
             reload_data = True
                    )

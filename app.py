@@ -35,12 +35,12 @@ job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
 # AGGRID TABLE
 # data = df[['age','day']]
-data = df
+#data = df
 
-#from sqlalchemy import create_engine
-#my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
-#sql = "select name, class, mark, sex from student"
-#data = pd.read_sql(sql,con=my_conn)
+from sqlalchemy import create_engine
+my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
+sql = "select name, class, mark, sex from student"
+data = pd.read_sql(sql,con=my_conn)
 
 
 #st.write(data)
@@ -52,13 +52,12 @@ grid_table = AgGrid(data,
             gridOptions = go, 
             enable_enterprise_modules = True,
             fit_columns_on_grid_load = False,
-            height=500,
+            height=350,
             width='100%',
-            # theme = "streamlit",
+            theme = "streamlit",
             update_mode = GridUpdateMode.SELECTION_CHANGED,
             reload_data = True
                    )
-st.write(grid_table)
 st.subheader(today)
 
 # creating a single-element container.

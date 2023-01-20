@@ -58,7 +58,7 @@ grid_table = AgGrid(data,
             update_mode = GridUpdateMode.SELECTION_CHANGED,
             reload_data = True
                    )
-
+st.write(grid_table)
 st.subheader(today)
 
 # creating a single-element container.

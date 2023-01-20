@@ -43,7 +43,7 @@ data = df
 #data = pd.read_sql(sql,con=my_conn)
 
 
-st.write(data)
+#st.write(data)
 gb = GridOptionsBuilder.from_dataframe(data)
 gb.configure_columns(list(df.columns.values), editable=True)
 gb.configure_column('virtual column a + b', valueGetter='Number(data.age)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])

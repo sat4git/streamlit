@@ -6,6 +6,10 @@ import plotly.express as px # interactive charts
 from datetime import datetime
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
+from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
+import pymysql  
+
 # read csv from a github repo
 df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")
 

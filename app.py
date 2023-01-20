@@ -54,7 +54,7 @@ grid_table = AgGrid(data,
             fit_columns_on_grid_load = True,
             height='100%',
             width='100%',
-            theme = "streamlit",
+            # theme = "streamlit",
             update_mode = GridUpdateMode.SELECTION_CHANGED,
             reload_data = True
                    )

@@ -36,8 +36,9 @@ job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 # AGGRID TABLE
 # data = df[['age','day']]
 # data = df
-from sqlalchemy import create_engine
 
+from sqlalchemy import create_engine
+my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
 sql = "select name, class, mark, sex from student"
 data = pd.read_sql(sql,con=my_conn)
 

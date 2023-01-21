@@ -82,7 +82,7 @@ for seconds in range(200):
     
     balance = np.mean(df['balance_new'])
     def color_survived(val):
-        color = '#7FFFD4' if val=='male' else 'red'
+        color = '#00FA9A' if val=='male' else '#FF6347'
         return f'background-color: {color}'
     
     with placeholder.container():

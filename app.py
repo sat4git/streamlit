@@ -81,7 +81,10 @@ for seconds in range(200):
     count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
     
     balance = np.mean(df['balance_new'])
-
+    def color_survived(val):
+        color = 'green' if val=='male' else 'red'
+        return f'background-color: {color}'
+    
     with placeholder.container():
         # create three columns
         kpi1, kpi2, kpi3 = st.columns(3)
@@ -103,8 +106,11 @@ for seconds in range(200):
             fig2 = px.histogram(data_frame = df, x = 'age_new')
             st.write(fig2)
         st.markdown("### Detailed Data View")
+        
+        st.dataframe(data.style.applymap(color_survived, subset=['sex']))
+
         st.dataframe(data)
-        time.sleep(1)
+        time.sleep(10)
     #placeholder.empty()
 
 

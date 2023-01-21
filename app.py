@@ -103,7 +103,7 @@ for seconds in range(200):
             fig2 = px.histogram(data_frame = df, x = 'age_new')
             st.write(fig2)
         st.markdown("### Detailed Data View")
-        st.dataframe(df)
+        st.dataframe(data)
         time.sleep(1)
     #placeholder.empty()
 

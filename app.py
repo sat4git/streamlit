@@ -11,53 +11,46 @@ from sqlalchemy.exc import SQLAlchemyError
 import pymysql  
 
 # read csv from a github repo
-df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")
+#df = pd.read_csv("https://raw.githubusercontent.com/sat4git/streamlit/main/bank.csv")
 
 
 st.set_page_config(
-    page_title = 'Real-Time Data Science Dashboard',
+    page_title = 'My Trading Dashboard',
     page_icon = '✅',
     layout = 'wide'
 )
 
 # dashboard title
 
-st.title("Real-Time / Live Data Science Dashboard")
+st.title("My first trading Dashboard")
 today = datetime.today().date()
 st.subheader(today)
 
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
+first_col2.metric(label="Current Balance ⏳", value=2222222, delta= 2222222-111111)
 
 # top-level filters 
 
-job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
+#job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
 
-# AGGRID TABLE
-# data = df[['age','day']]
-#data = df
-
-from sqlalchemy import create_engine
 my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
-sql = "select name, class, mark, sex from student"
-data = pd.read_sql(sql,con=my_conn)
-
 
 #st.write(data)
-gb = GridOptionsBuilder.from_dataframe(data)
-gb.configure_columns(list(df.columns.values), editable=True)
-gb.configure_column('virtual column a + b', valueGetter='Number(data.age)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
-go = gb.build()
-grid_table = AgGrid(data, 
-            gridOptions = go, 
-            enable_enterprise_modules = True,
-            fit_columns_on_grid_load = False,
-            height=350,
-            width='100%',
-            theme = "streamlit",
-            update_mode = GridUpdateMode.SELECTION_CHANGED,
-            reload_data = True
-                   )
+#gb = GridOptionsBuilder.from_dataframe(data)
+#gb.configure_columns(list(df.columns.values), editable=True)
+#gb.configure_column('virtual column a + b', valueGetter='Number(data.age)', cellRenderer='agAnimateShowChangeCellRenderer', editable='false', type=['numericColumn'])
+#go = gb.build()
+#grid_table = AgGrid(data, 
+#            gridOptions = go, 
+#            enable_enterprise_modules = True,
+#            fit_columns_on_grid_load = False,
+#            height=350,
+#            width='100%',
+#            theme = "streamlit",
+#            update_mode = GridUpdateMode.SELECTION_CHANGED,
+#            reload_data = True
+#                   )
 st.subheader(today)
 
 # creating a single-element container.
@@ -65,46 +58,46 @@ placeholder = st.empty()
 
 # dataframe filter 
 
-df = df[df['job']==job_filter]
+#df = df[df['job']==job_filter]
 def color_Profit(val):
     color = '#00FA9A' if val>0 else '#FF6347'
     return f'background-color: {color}'
 
 # near real-time / live feed simulation 
 
-for seconds in range(200):
-#while True: 
+#for seconds in range(200):
+while True: 
     
-    df['age_new'] = df['age'] * np.random.choice(range(1,5))
-    df['balance_new'] = df['balance'] * np.random.choice(range(1,5))
+    #df['age_new'] = df['age'] * np.random.choice(range(1,5))
+    #df['balance_new'] = df['balance'] * np.random.choice(range(1,5))
 
     # creating KPIs 
-    avg_age = np.mean(df['age_new']) 
+    #avg_age = np.mean(df['age_new']) 
 
-    count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
+    #count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
     
-    balance = np.mean(df['balance_new'])
+    #balance = np.mean(df['balance_new'])
     
     with placeholder.container():
         # create three columns
-        kpi1, kpi2, kpi3 = st.columns(3)
+        #kpi1, kpi2, kpi3 = st.columns(3)
 
         # fill in those three columns with respective metrics or KPIs 
-        kpi1.metric(label="Age ⏳", value=round(avg_age), delta= round(avg_age) - 10)
-        kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
-        kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
+        #kpi1.metric(label="Age ⏳", value=round(avg_age), delta= round(avg_age) - 10)
+        #kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
+        #kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
 
         # create two columns for charts 
 
-        fig_col1, fig_col2 = st.columns(2)
-        with fig_col1:
-            st.markdown("### First Chart")
-            fig = px.density_heatmap(data_frame=df, y = 'age_new', x = 'marital')
-            st.write(fig)
-        with fig_col2:
-            st.markdown("### Second Chart")
-            fig2 = px.histogram(data_frame = df, x = 'age_new')
-            st.write(fig2)
+        #fig_col1, fig_col2 = st.columns(2)
+        #with fig_col1:
+        #    st.markdown("### First Chart")
+        #    fig = px.density_heatmap(data_frame=df, y = 'age_new', x = 'marital')
+        #    st.write(fig)
+        #with fig_col2:
+        #    st.markdown("### Second Chart")
+        #    fig2 = px.histogram(data_frame = df, x = 'age_new')
+        #    st.write(fig2)
         st.markdown("### Detailed Data View")
         sql = "select Date, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff from TradeBook"
         data = pd.read_sql(sql,con=my_conn)

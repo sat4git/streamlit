@@ -108,7 +108,7 @@ for seconds in range(200):
         st.markdown("### Detailed Data View")
         sql = "select Date, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
-        st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage']))
+        st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff']))
         time.sleep(10)
     #placeholder.empty()
 

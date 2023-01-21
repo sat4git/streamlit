@@ -82,7 +82,7 @@ for seconds in range(200):
     
     balance = np.mean(df['balance_new'])
     def color_survived(val):
-        color = 'green' if val=='male' else 'red'
+        color = '#7FFFD4' if val=='male' else 'red'
         return f'background-color: {color}'
     
     with placeholder.container():
@@ -108,8 +108,6 @@ for seconds in range(200):
         st.markdown("### Detailed Data View")
         
         st.dataframe(data.style.applymap(color_survived, subset=['sex']))
-
-        st.dataframe(data)
         time.sleep(10)
     #placeholder.empty()
 

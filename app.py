@@ -66,6 +66,9 @@ placeholder = st.empty()
 # dataframe filter 
 
 df = df[df['job']==job_filter]
+def color_Profit(val):
+    color = '#00FA9A' if val>0 else '#FF6347'
+    return f'background-color: {color}'
 
 # near real-time / live feed simulation 
 
@@ -81,9 +84,6 @@ for seconds in range(200):
     count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
     
     balance = np.mean(df['balance_new'])
-    def color_survived(val):
-        color = '#00FA9A' if val=='male' else '#FF6347'
-        return f'background-color: {color}'
     
     with placeholder.container():
         # create three columns
@@ -106,8 +106,9 @@ for seconds in range(200):
             fig2 = px.histogram(data_frame = df, x = 'age_new')
             st.write(fig2)
         st.markdown("### Detailed Data View")
-        
-        st.dataframe(data.style.applymap(color_survived, subset=['sex']))
+        sql = "select Date, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff from TradeBook"
+        data = pd.read_sql(sql,con=my_conn)
+        st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage']))
         time.sleep(10)
     #placeholder.empty()
 

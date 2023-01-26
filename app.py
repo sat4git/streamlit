@@ -52,7 +52,7 @@ today = dt.date.today().strftime('%b-%d-%Y')
 second_col1, second_col2, second_col3 = st.columns(3)
 d = second_col2.date_input(
     "Choose your date for the tradeBook view")
-second_col1.markdown(f"Todays date is:<br>##{today}")
+second_col1.markdown(f"""Todays date is:<br> ##{today}""")
 second_col3.metric(label="Today\'s Date is:", value=today)
 # creating a single-element container.
 placeholder = st.empty()

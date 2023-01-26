@@ -101,7 +101,7 @@ while True:
         with fig_col1:
             st.markdown("### First Chart")
             fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
-                        color_discrete_sequence=['red' if i<0 else 'green' for i in data['Profit_Loss_percentage']])
+                        color_discrete_sequence=['red' if int(i)<0 else 'green' for i in data['Profit_Loss_percentage']])
             st.write(fig)
         #with fig_col2:
         #    st.markdown("### Second Chart")

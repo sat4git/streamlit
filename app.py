@@ -106,7 +106,7 @@ while True:
                      category_orders={"x": data["id"].astype("str")+"_"+data["CryptoCoin"]}
                     )
         #['red' if i>0 else 'green' for i in data['Profit_Loss_percentage'].astype("float")]
-        st.write(fig)
+        st.plotly_chart(fig,use_container_width=True)
         #with fig_col2:
         #    st.markdown("### Second Chart")
         #    fig2 = px.histogram(data_frame = df, x = 'age_new')

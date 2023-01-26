@@ -90,9 +90,9 @@ while True:
 
         
         st.markdown("### Detailed Data View")
-        sql = "select Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
+        sql = "select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
-        data['Time'] = data.Time.dt.strftime("%H:%M:%S") 
+        data['Time'] = data['Time'].astype("str") 
         st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
         
         # create two columns for charts 
@@ -100,7 +100,7 @@ while True:
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
             st.markdown("### First Chart")
-            fig = px.bar(data, x="CryptoCoin", y="Profit_Loss_percentage")
+            fig = px.bar(data, x=data["id"]+"_"+data["CryptoCoin"], y="Profit_Loss_percentage")
             st.write(fig)
         #with fig_col2:
         #    st.markdown("### Second Chart")

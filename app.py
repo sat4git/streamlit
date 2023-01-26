@@ -33,7 +33,7 @@ first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.1
 first_col2.metric(label="Current Balance ⏳", value=2222222, delta= 2222222-111111)
 pageView = first_col3.radio(
     "Choose the page view you wish to see:",
-    ('Todays_eachTrade', 'Daily_results', 'Documentary'))
+    ('Trade_view', 'Daily_results', 'Documentary'))
 
 my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
 
@@ -55,7 +55,7 @@ my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhos
 today = dt.date.today().strftime('%b-%d-%Y')
 second_col1, second_col2, second_col3 = st.columns(3)
 d = second_col2.date_input(
-    "Choose your date for the tradeBook view")
+    "Choose your date for the trade view")
 text_markdown = f"### {today}"          
 second_col1.metric(label="Today\'s Date is:", value=today)
 # creating a single-element container.
@@ -71,7 +71,7 @@ def color_Profit(val):
 # near real-time / live feed simulation 
 
 #for seconds in range(200):
-if pageView == 'Todays_eachTrade':
+if pageView == 'Trade_view':
     while True: 
 
         #df['age_new'] = df['age'] * np.random.choice(range(1,5))

@@ -98,8 +98,8 @@ while True:
         # create two columns for charts 
 
         #fig_col1, fig_col2 = st.columns(2)
-        fig_col1 = st.columns(1)
-        with fig_col1:
+        fig_col1 = st.empty()
+        with fig_col1.container():
             st.markdown("### First Chart")
             fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
                         color=['red' if i<0 else 'green' for i in data['Profit_Loss_percentage']], color_discrete_map="identity",

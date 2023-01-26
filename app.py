@@ -118,6 +118,7 @@ elif pageView == 'Daily_results':
         st.markdown("### Daily View")
         sql_daily = "select * from DailyBook"
         data_daily = pd.read_sql(sql_daily,con=my_conn)
+        data_daily['Time'] = data_daily['Time'].astype("str")
         st.dataframe(data_daily.style.applymap(color_Profit, subset=['BTC_TotalVale','BTC_BNB_Diff']))
 else:
     st.markdown("### Currently work in progress please select either of the first 2 options. Thank you")

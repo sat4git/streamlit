@@ -23,7 +23,11 @@ st.set_page_config(
 
 # dashboard title
 st.title(f"My first trading Dashboard")
-
+st.markdown(
+"90% of people love to enjoy music, while they are working! \n"
+"are you one of them, we have a curated list of chillout tracks \n"
+"that may help you bring out the calmness in you."
+)
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
 first_col2.metric(label="Current Balance ⏳", value=2222222, delta= 2222222-111111)

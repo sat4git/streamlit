@@ -102,6 +102,7 @@ while True:
             st.markdown("### First Chart")
             fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
                         color=["red", "green","red", "green","red"], color_discrete_map="identity")
+            fig.update_layout(xaxis=dict(type='category'))
             #['red' if i>0 else 'green' for i in data['Profit_Loss_percentage'].astype("float")]
             st.write(fig)
         #with fig_col2:

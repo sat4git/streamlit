@@ -87,22 +87,24 @@ while True:
         #kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
         #kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
 
-        # create two columns for charts 
-
-        #fig_col1, fig_col2 = st.columns(2)
-        #with fig_col1:
-        #    st.markdown("### First Chart")
-        #    fig = px.density_heatmap(data_frame=df, y = 'age_new', x = 'marital')
-        #    st.write(fig)
-        #with fig_col2:
-        #    st.markdown("### Second Chart")
-        #    fig2 = px.histogram(data_frame = df, x = 'age_new')
-        #    st.write(fig2)
+        
         st.markdown("### Detailed Data View")
         sql = "select Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
         data['Time'] = data['Time'].astype(str) 
         st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
+        
+        # create two columns for charts 
+
+        fig_col1, fig_col2 = st.columns(2)
+        with fig_col1:
+            st.markdown("### First Chart")
+            fig = px.bar(dd, x="Date", y="Profit_Loss_percentage", color=['red' if i<0 else 'green' for i in data['Profit_Loss_percentage']])
+            st.write(fig)
+        #with fig_col2:
+        #    st.markdown("### Second Chart")
+        #    fig2 = px.histogram(data_frame = df, x = 'age_new')
+        #    st.write(fig2)
         time.sleep(10)
     #placeholder.empty()
 

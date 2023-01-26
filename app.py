@@ -91,7 +91,7 @@ while True:
         st.markdown("### Detailed Data View")
         sql = "select Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
-        data['Time'] = data['Time'].astype(str) 
+        data['Time'] = data['Time'].strftime("%H:%M:%S") 
         st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
         
         # create two columns for charts 

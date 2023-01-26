@@ -48,11 +48,13 @@ my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhos
 #            update_mode = GridUpdateMode.SELECTION_CHANGED,
 #            reload_data = True
 #                   )
+today = dt.date.today().strftime('%b-%d-%Y')
+st.subheader(today)
 second_col1, second_col2, second_col3 = st.columns(3)
 d = second_col1.date_input(
     "Choose your date for the tradeBook view")
 second_col2.subheader(d)
-second_col3.metric(label="Today\'s Date is:", value=dt.date.today().strftime('%b-%d-%Y'))
+second_col3.metric(label="Today\'s Date is:", value=today)
 # creating a single-element container.
 placeholder = st.empty()
 

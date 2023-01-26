@@ -23,10 +23,7 @@ st.set_page_config(
 
 # dashboard title
 
-st.title("My first trading Dashboard")
-d = st.date_input(
-    "Choose your date for the tradeBook view")
-st.subheader(d)
+st.title(f"My first trading Dashboard {dt.today.strftime("%b-%d-%Y")}")
 
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
@@ -52,8 +49,11 @@ my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhos
 #            update_mode = GridUpdateMode.SELECTION_CHANGED,
 #            reload_data = True
 #                   )
-st.subheader(d)
-
+second_col1, second_col2, second_col3 = st.columns(3)
+d = second_col1.date_input(
+    "Choose your date for the tradeBook view")
+second_col2.subheader(d)
+second_col3.metric(label="Today\'s Date is:", value=dt.today.strftime("%b-%d-%Y"), delta= round(avg_age) - 10)
 # creating a single-element container.
 placeholder = st.empty()
 

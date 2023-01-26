@@ -23,7 +23,7 @@ st.set_page_config(
 
 # dashboard title
 
-st.title(f"My first trading Dashboard {dt.today.strftime("%b-%d-%Y")}")
+st.title(f"My first trading Dashboard {dt.today.strftime('%b-%d-%Y')}")
 
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)

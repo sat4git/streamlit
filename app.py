@@ -24,7 +24,7 @@ st.set_page_config(
 # dashboard title
 st.title(f"My first trading Dashboard")
 st.markdown(
-"90% of people love to enjoy music, while they are working! \n"
+"90% of people love to enjoy music, while they are working! \n  "  
 "are you one of them, we have a curated list of chillout tracks \n"
 "that may help you bring out the calmness in you."
 )

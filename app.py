@@ -101,8 +101,9 @@ while True:
         with fig_col1:
             st.markdown("### First Chart")
             fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
-                        color=["red", "green","red", "green","red"], color_discrete_map="identity")
-            fig.update_xaxes(type='category')
+                        color=["red", "green","red", "green","red"], color_discrete_map="identity",
+                        category_orders={"x": data["id"].astype("str")+"_"+data["CryptoCoin"]}
+                        )
             #['red' if i>0 else 'green' for i in data['Profit_Loss_percentage'].astype("float")]
             st.write(fig)
         #with fig_col2:

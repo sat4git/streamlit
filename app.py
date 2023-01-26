@@ -3,7 +3,7 @@ import numpy as np # np mean, np random
 import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
-from datetime import datetime as dt
+from datetime import datetime
 #import datetime as dt
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
@@ -48,7 +48,7 @@ my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhos
 #            update_mode = GridUpdateMode.SELECTION_CHANGED,
 #            reload_data = True
 #                   )
-today = dt.date.today().strftime('%b-%d-%Y')
+today = datetime.date.today().strftime('%b-%d-%Y')
 st.subheader(today)
 second_col1, second_col2, second_col3 = st.columns(3)
 d = second_col1.date_input(

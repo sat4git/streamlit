@@ -100,8 +100,6 @@ if pageView == 'Trade_view':
             if len(data)>0:
                 data['Time'] = data['Time'].astype("str")
                 st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
-            else:
-                st.subheader("There are no records for this date. Please choose another date")
             # create two columns for charts 
 
             #fig_col1, fig_col2 = st.columns(2)
@@ -118,6 +116,9 @@ if pageView == 'Trade_view':
             #    st.markdown("### Second Chart")
             #    fig2 = px.histogram(data_frame = df, x = 'age_new')
             #    st.write(fig2)
+            else:
+                st.subheader("There are no records for this date. Please choose another date")
+            
             time.sleep(10)
             
 elif pageView == 'Daily_results':

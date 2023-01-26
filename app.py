@@ -113,15 +113,15 @@ if pageView == 'Todays_eachTrade':
             #    st.write(fig2)
             time.sleep(10)
             
-elif pageView == 'Todays_eachTrade':
+elif pageView == 'Daily_results':
     with placeholder.container():
         st.markdown("### Daily View")
         sql = "select id, Date, CryptoCoin,  Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
         data['Time'] = data['Time'].astype("str")
         st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff']))
-
- 
+else:
+    st.markdown("### Currently work in progress please select either of the first 2 options. Thank you")
     #placeholder.empty()
 
 

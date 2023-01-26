@@ -3,8 +3,8 @@ import numpy as np # np mean, np random
 import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
-#from datetime import datetime
-import datetime as dt
+from datetime import datetime as dt
+#import datetime as dt
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
 from sqlalchemy import create_engine

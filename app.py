@@ -91,11 +91,13 @@ if pageView == 'Todays_eachTrade':
 
             text1 = f"### Detailed TradeBook View for {d}"
             st.markdown(text1)
-            sql = "select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
+            sql = f"select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook WHERE DATE(Date) = '{d}'"
             data = pd.read_sql(sql,con=my_conn)
-            data['Time'] = data['Time'].astype("str")
-            st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
-
+            if len(data)>0:
+                data['Time'] = data['Time'].astype("str")
+                st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
+            else:
+                st.subheader("There are no records for this date. Please choose another date")
             # create two columns for charts 
 
             #fig_col1, fig_col2 = st.columns(2)

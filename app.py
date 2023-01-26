@@ -3,7 +3,8 @@ import numpy as np # np mean, np random
 import pandas as pd # read csv, df manipulation
 import time # to simulate a real time data, time loop 
 import plotly.express as px # interactive charts 
-from datetime import datetime
+#from datetime import datetime
+import datetime as dt
 from st_aggrid import AgGrid, DataReturnMode, GridUpdateMode, GridOptionsBuilder
 
 from sqlalchemy import create_engine
@@ -23,7 +24,7 @@ st.set_page_config(
 # dashboard title
 
 st.title("My first trading Dashboard")
-today = datetime.today().date()
+today = dt.today().date()
 st.subheader(today)
 
 first_col1, first_col2, first_col3 = st.columns(3)
@@ -91,7 +92,7 @@ while True:
         st.markdown("### Detailed Data View")
         sql = "select Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
-        data['Time'] = data['Time'].strftime("%H:%M:%S") 
+        data['Time'] = data.Time.dt.strftime("%H:%M:%S") 
         st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
         
         # create two columns for charts 

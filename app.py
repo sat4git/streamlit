@@ -30,10 +30,9 @@ st.subheader(today)
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
 first_col2.metric(label="Current Balance ⏳", value=2222222, delta= 2222222-111111)
-
-# top-level filters 
-
-#job_filter = st.selectbox("Select the Job", pd.unique(df['job']))
+pageView = first_col3.radio(
+    "Choose the page view you wish to see:",
+    ('Todays_eachTrade', 'Daily_results', 'Documentary'))
 
 my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhosting.net:3306/sql7586812")
 
@@ -67,51 +66,62 @@ def color_Profit(val):
 # near real-time / live feed simulation 
 
 #for seconds in range(200):
-while True: 
-    
-    #df['age_new'] = df['age'] * np.random.choice(range(1,5))
-    #df['balance_new'] = df['balance'] * np.random.choice(range(1,5))
+if pageView == 'Todays_eachTrade':
+    while True: 
 
-    # creating KPIs 
-    #avg_age = np.mean(df['age_new']) 
+        #df['age_new'] = df['age'] * np.random.choice(range(1,5))
+        #df['balance_new'] = df['balance'] * np.random.choice(range(1,5))
 
-    #count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
-    
-    #balance = np.mean(df['balance_new'])
-    
+        # creating KPIs 
+        #avg_age = np.mean(df['age_new']) 
+
+        #count_married = int(df[(df["marital"]=='married')]['marital'].count() + np.random.choice(range(1,30)))
+
+        #balance = np.mean(df['balance_new'])
+
+        with placeholder.container():
+            # create three columns
+            #kpi1, kpi2, kpi3 = st.columns(3)
+
+            # fill in those three columns with respective metrics or KPIs 
+            #kpi1.metric(label="Age ⏳", value=round(avg_age), delta= round(avg_age) - 10)
+            #kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
+            #kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
+
+
+            st.markdown("### Detailed Data View")
+            sql = "select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
+            data = pd.read_sql(sql,con=my_conn)
+            data['Time'] = data['Time'].astype("str")
+            st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
+
+            # create two columns for charts 
+
+            #fig_col1, fig_col2 = st.columns(2)
+            #fig_col1 = st.empty()
+            #with fig_col1.container():
+            st.markdown("### First Chart")
+            fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
+                         color=['red' if i<0 else 'green' for i in data['Profit_Loss_percentage']], color_discrete_map="identity",
+                         category_orders={"x": data["id"].astype("str")+"_"+data["CryptoCoin"]}
+                        )
+            #['red' if i>0 else 'green' for i in data['Profit_Loss_percentage'].astype("float")]
+            st.plotly_chart(fig,use_container_width=True)
+            #with fig_col2:
+            #    st.markdown("### Second Chart")
+            #    fig2 = px.histogram(data_frame = df, x = 'age_new')
+            #    st.write(fig2)
+            time.sleep(10)
+            
+elif pageView == 'Todays_eachTrade':
     with placeholder.container():
-        # create three columns
-        #kpi1, kpi2, kpi3 = st.columns(3)
-
-        # fill in those three columns with respective metrics or KPIs 
-        #kpi1.metric(label="Age ⏳", value=round(avg_age), delta= round(avg_age) - 10)
-        #kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
-        #kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
-
-        
-        st.markdown("### Detailed Data View")
-        sql = "select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
+        st.markdown("### Daily View")
+        sql = "select id, Date, CryptoCoin,  Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
         data = pd.read_sql(sql,con=my_conn)
         data['Time'] = data['Time'].astype("str")
-        st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff','Profit_after_fees']))
-        
-        # create two columns for charts 
+        st.dataframe(data.style.applymap(color_Profit, subset=['Profit_Loss_percentage','Bitcoin_diff']))
 
-        #fig_col1, fig_col2 = st.columns(2)
-        #fig_col1 = st.empty()
-        #with fig_col1.container():
-        st.markdown("### First Chart")
-        fig = px.bar(data, x=data["id"].astype("str")+"_"+data["CryptoCoin"], y="Profit_Loss_percentage",
-                     color=['red' if i<0 else 'green' for i in data['Profit_Loss_percentage']], color_discrete_map="identity",
-                     category_orders={"x": data["id"].astype("str")+"_"+data["CryptoCoin"]}
-                    )
-        #['red' if i>0 else 'green' for i in data['Profit_Loss_percentage'].astype("float")]
-        st.plotly_chart(fig,use_container_width=True)
-        #with fig_col2:
-        #    st.markdown("### Second Chart")
-        #    fig2 = px.histogram(data_frame = df, x = 'age_new')
-        #    st.write(fig2)
-        time.sleep(10)
+ 
     #placeholder.empty()
 
 

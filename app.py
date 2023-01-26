@@ -24,8 +24,9 @@ st.set_page_config(
 # dashboard title
 
 st.title("My first trading Dashboard")
-today = dt.today().date()
-st.subheader(today)
+d = st.date_input(
+    "Choose your date for the tradeBook view")
+st.subheader(d)
 
 first_col1, first_col2, first_col3 = st.columns(3)
 first_col1.metric(label="Opening Balance ⏳", value=1111111, delta= 1111111*0.111111)
@@ -88,8 +89,8 @@ if pageView == 'Todays_eachTrade':
             #kpi2.metric(label="Married Count 💍", value= int(count_married), delta= - 10 + count_married)
             #kpi3.metric(label="A/C Balance ＄", value= f"$ {round(balance,2)} ", delta= - round(balance/count_married) * 100)
 
-
-            st.markdown("### Detailed Data View")
+            text1 = f"### Detailed TradeBook View for {d}"
+            st.markdown(text1)
             sql = "select id, Date, Time, Bitcoin_EUR, CryptoCoin, Quantity, BuyPrice, SellPrice, Profit_Loss_percentage, Bitcoin_diff, Profit_after_fees from TradeBook"
             data = pd.read_sql(sql,con=my_conn)
             data['Time'] = data['Time'].astype("str")

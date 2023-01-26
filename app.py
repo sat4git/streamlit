@@ -52,7 +52,7 @@ my_conn = create_engine("mysql+pymysql://sql7586812:eUs4d8LNPB@sql7.freemysqlhos
 #            update_mode = GridUpdateMode.SELECTION_CHANGED,
 #            reload_data = True
 #                   )
-st.subheader(today)
+st.subheader(d)
 
 # creating a single-element container.
 placeholder = st.empty()

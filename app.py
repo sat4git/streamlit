@@ -99,7 +99,7 @@ while True:
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
             st.markdown("### First Chart")
-            fig = px.bar(data, x="Date", y="Profit_Loss_percentage")
+            fig = px.bar(data, x="CryptoCoin", y="Profit_Loss_percentage")
             st.write(fig)
         #with fig_col2:
         #    st.markdown("### Second Chart")
